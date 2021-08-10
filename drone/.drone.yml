@@ -1,0 +1,101 @@
+#官方文档：https://docs.drone.io/yaml/docker/#the-pipeline-object
+kind: pipeline
+type: docker #docker runner来执行
+name: maven-build #该通道名称
+
+#指定分支
+trigger:
+  branch:
+    - dev
+
+#主机挂载位置
+volumes:
+  - name: maven
+    host:
+      path: /data/dockerMount/maven/
+  - name: projects
+    host:
+      path: /data/projects
+
+steps:
+  - name: 项目构建
+    image: maven:3.8-openjdk-11
+    volumes:
+      - name: maven
+        path: /root/.m2
+      - name: projects
+        path: /root/projects
+    commands:
+          # sh 命令
+
+---
+kind: pipeline
+type: ssh  #使用ssh通道
+name: image-push
+
+#取消git clone代码
+clone:
+  disable: true
+
+#指定在其他通道完成之后之执行本通道
+depends_on:
+  - maven-build
+
+
+trigger:
+  branch:
+    - dev
+
+#要连接的服务器
+server:
+  host: ip地址
+  user: root
+  password:
+    from_secret: 在drone中存的密码
+
+steps:
+  - name: 构建镜像
+    commands:
+
+  - name: 上传镜像
+    commands:
+
+  - name: 删除镜像
+    failure: ignore
+    commands:
+
+
+---
+kind: pipeline
+type: ssh
+name: project-run
+
+clone:
+  disable: true
+depends_on:
+  - image-push
+
+trigger:
+  branch:
+    - dev
+
+server:
+  host: ip地址
+  user: root
+  password:
+    from_secret: 密码
+
+steps:
+  - name: 停止旧容器
+    failure: ignore
+    commands:
+  - name: 删除旧容器
+    failure: ignore
+    commands:
+  - name: 删除旧镜像
+    failure: ignore
+    commands:
+  - name: 拉取镜像
+    commands:
+  - name: 运行镜像
+    commands:
