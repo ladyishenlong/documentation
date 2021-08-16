@@ -6,7 +6,8 @@
 - 无论是依赖的开发者还是使用者，由于是私有项目都需要有gitlab上该项目的访问权限
 
 ## 权限
-- 无论是开发者还是使用者，在gitlab中创建访问令牌后放入maven的setting.xml文件之中（所有用到该依赖的位置都需要加入）
+
+- 无论是开发者还是使用者，在gitlab中创建访问令牌后(read_repository,write_repository ,api)放入maven的setting.xml文件之中（所有用到该依赖的位置都需要加入）
 ```xml
 <settings>
     <servers>
