@@ -15,6 +15,8 @@ docker run \
  -p 8080:80 \
  -p 8443:443 \
  -p 2222:22 \
+ -p 5000:5000 \
+ -p 5005:5005 \
  -v /home/dockerMount/gitlab/conf:/etc/gitlab  \
  -v /home/dockerMount/gitlab/logs:/var/log/gitlab \
  -v /home/dockerMount/gitlab/data:/var/opt/gitlab \
