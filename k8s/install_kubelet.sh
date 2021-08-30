@@ -109,6 +109,6 @@ yum install -y kubelet-1.21.2 kubeadm-1.21.2 kubectl-1.21.2
 # 重启 docker，并启动 kubelet
 systemctl daemon-reload
 systemctl restart docker
-systemctl enable kubelet && systemctl start kubelet
+systemctl enable kubelet && systemctl start docker version
 
 docker version
