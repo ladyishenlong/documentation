@@ -62,7 +62,6 @@ echo "${MASTER_IP}    ${APISERVER_NAME}" >> /etc/hosts
 curl -sSL https://kuboard.cn/install-script/v1.21.x/init_master.sh | sh -s 1.21.4 /coredns
 ```
 
-
 ## 安装网络插件
 ```shell
 export POD_SUBNET=10.100.0.0/16
@@ -72,7 +71,7 @@ sed -i "s#192.168.0.0/16#${POD_SUBNET}#" calico-custom-resources.yaml
 kubectl apply -f calico-custom-resources.yaml
 ```
 
-#初始化 worker节点
+## 初始化 worker节点
 ```shell
 # 只在 master 节点执行
 kubeadm token create --print-join-command
@@ -92,5 +91,26 @@ echo "${MASTER_IP}    ${APISERVER_NAME}" >> /etc/hosts
 # 替换为 master 节点上 kubeadm token create 命令的输出
 kubeadm join k8s.server:6443 --token 5cg17f.1fpw32aiko5nodye \
 --discovery-token-ca-cert-hash sha256:5416959646a40669d3d64e68b5dc0cfc13b468915b7da5b9c8d4d6c02fc3c07b 
- 
+```
+
+## 安装helm
+```shell
+version=v3.6.3
+#从华为开源镜像站下载
+curl -LO https://repo.huaweicloud.com/helm/v3.6.3/helm-v3.6.3-linux-amd64.tar.gz
+tar -zxvf helm-v3.6.3-linux-amd64.tar.gz
+mv linux-amd64/helm /usr/local/bin/helm && rm -rf linux-amd64
+```
+## 安装 traefik-stable
+```shell
+
+helm repo add traefik https://helm.traefik.io/traefik
+helm repo update
+helm install traefik traefik/traefik
+
+
+kubectl port-forward $(kubectl get pods --selector \
+"app.kubernetes.io/name=traefik" --output=name) 9000:9000
+
+
 ```
