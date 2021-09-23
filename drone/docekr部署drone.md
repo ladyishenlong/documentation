@@ -26,6 +26,7 @@ docker run -td --name=drone \
 --env=DRONE_GITLAB_CLIENT_ID={gitlab客户端id} \
 --env=DRONE_GITLAB_CLIENT_SECRET={gitlab密钥} \
 --env=DRONE_RPC_SECRET={共享密钥} \
+--env=DRONE_USER_CREATE=username:{{DRONE_ADMIN}},machine:false,admin:true \
 drone/drone:2.0.2
 ```
 
