@@ -46,3 +46,21 @@ docker info
 ```
 
 
+```json
+{
+  "registry-mirrors": [
+    "https://registry.docker-cn.com",
+    "https://{公网ip}"
+  ],
+  "insecure-registries": [
+    "http://{内部ip}"
+  ],
+  "data-root": "/home/docker/",
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "1000m",
+    "max-file": "5"
+  }
+}
+```
+
