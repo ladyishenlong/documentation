@@ -51,3 +51,20 @@ docker exec gitlab gitlab-rake gitlab:backup:create
 ```
 
 
+##gitlab
+gitlab-secrets.json
+gitlab.rb
+两个文件必须备份转移
+
+```shell
+gitlab-rails db
+-- Clear project tokens
+UPDATE projects SET runners_token = null, runners_token_encrypted = null
+-- Clear group tokens
+UPDATE namespaces SET runners_token = null, runners_token_encrypted = null;
+-- Clear instance tokens
+UPDATE application_settings SET runners_registration_token_encrypted = null;
+```
+
+
+

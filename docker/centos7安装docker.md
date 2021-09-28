@@ -49,8 +49,7 @@ docker info
 ```json
 {
   "registry-mirrors": [
-    "https://registry.docker-cn.com",
-    "https://{公网ip}"
+    "https://registry.docker-cn.com"
   ],
   "insecure-registries": [
     "http://{内部ip}"
