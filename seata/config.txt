@@ -12,7 +12,7 @@ store.db.lockTable=lock_table
 
 #以下不用谢
 store.redis.mode=single
-store.redis.single.host=127.0.0.1
+store.redis.single.host=192.168.1.249
 store.redis.single.port=6379
 store.redis.sentinel.masterName=
 store.redis.sentinel.sentinelHosts=
@@ -20,5 +20,5 @@ store.redis.maxConn=10
 store.redis.minConn=1
 store.redis.maxTotal=100
 store.redis.database=0
-store.redis.password=
+store.redis.password=htwater0609
 store.redis.queryLimit=100

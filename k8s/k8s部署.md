@@ -14,6 +14,7 @@ hostnamectl set-hostname k8s-w1
 hostnamectl set-hostname k8s-w2
 ```
 
+
 ## 数据盘挂载
 - 分区
 ```shell

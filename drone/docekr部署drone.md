@@ -2,7 +2,7 @@
 
 ## 下载镜像
 ```shell
-docker pull drone/drone:2.0.2
+docker pull drone/drone:2.4.0
 ```
 
 ## 生成共享密钥
